@@ -15,10 +15,10 @@ const computerPlay = () => {
 }
 
 // Function where the player chooses between rock, paper and scissors
-const playerPlay = () => {
-  let playerSelection = prompt("Pick Rock, Paper or Scissors!");
+const playerPlay = (round) => {
+  let playerSelection = prompt(`Round ${round + 1}!\nPick Rock, Paper or Scissors!`);
   while (playerSelection.toLowerCase() !== "rock" && playerSelection.toLowerCase() !== "paper" && playerSelection.toLowerCase() !== "scissors") {
-    playerSelection = prompt("Try again! You need to pick between rock, paper or scissors.");
+    playerSelection = prompt(`Round ${round + 1}!\nTry again! You need to pick between rock, paper or scissors.`);
   }
   return playerSelection.toLowerCase()
 }
@@ -77,7 +77,7 @@ const game = () => {
   console.log("Rock Paper Scissors");
   for (let i = 0; i < 5; i++) {
     // const playerSelection = computerPlay();
-    const playerSelection = playerPlay();
+    const playerSelection = playerPlay(i);
     const computerSelection = computerPlay();
     const roundResult = playRound(playerSelection, computerSelection);
     console.log(`\nRound ${i + 1}:`);
@@ -103,8 +103,8 @@ const game = () => {
 
 //Function for playing again
 const playAgain = () => {
-  let again = prompt("Do you want to play again?\n Type y for YES or anythings else for NO");
-  if (again.toLowerCase() === "y") {
+  let again = prompt("Do you want to play again?\nType YES or anythings else for NO!");
+  if (again.toLowerCase() === "yes") {
     console.clear();
     game();
     playAgain();
