@@ -16,11 +16,11 @@ const computerPlay = () => {
 
 // Function where the player chooses between rock, paper and scissors
 const playerPlay = (round) => {
-  let playerSelection = prompt(`Round ${round + 1}!\nPick Rock, Paper or Scissors!`);
-  while (playerSelection.toLowerCase() !== "rock" && playerSelection.toLowerCase() !== "paper" && playerSelection.toLowerCase() !== "scissors") {
+  let playerSelection = prompt(`Round ${round + 1}!\nPick Rock, Paper or Scissors!`).toLowerCase();
+  while (playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissors") {
     playerSelection = prompt(`Round ${round + 1}!\nTry again! You need to pick between rock, paper or scissors.`);
   }
-  return playerSelection.toLowerCase()
+  return playerSelection;
 }
 
 // Initial function that the assignment told us to do
@@ -55,20 +55,19 @@ const playerPlay = (round) => {
 // }
 
 // Function that plays one round and returns 0 for draw, 1 for win or -1 for loss
-const playRound = (playerSelection, computerSelection) =>
-  playerSelection === computerSelection
-  ?
-  0
-  :
-  playerSelection === "rock" && computerSelection === "paper"
-    ||
-    playerSelection === "paper" && computerSelection === "scissors"
-    ||
-    playerSelection === "scissors" && computerSelection === "rock"
-  ?
-  -1
-  :
-  1
+const playRound = (playerSelection, computerSelection) => {
+  if (playerSelection === computerSelection) {
+    return 0;
+  } else if (
+      playerSelection === "rock" && computerSelection === "paper" ||
+      playerSelection === "paper" && computerSelection === "scissors" ||
+      playerSelection === "scissors" && computerSelection === "rock"
+      ) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
 
 // Funcition for playing one game of 5 rounds
 const game = () => {
@@ -76,7 +75,6 @@ const game = () => {
   let computerScore = 0;
   console.log("Rock Paper Scissors");
   for (let i = 0; i < 5; i++) {
-    // const playerSelection = computerPlay();
     const playerSelection = playerPlay(i);
     const computerSelection = computerPlay();
     const roundResult = playRound(playerSelection, computerSelection);
